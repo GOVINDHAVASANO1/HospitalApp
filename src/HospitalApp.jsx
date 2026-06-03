@@ -196,6 +196,9 @@ export default function HospitalApp() {
   const todayDate = today.toISOString().split("T")[0];
   const selectedDoctorData = DOCTORS.find(d => d.name === form.doctor);
   const availableTimes = selectedDoctorData ? selectedDoctorData.times : [];
+  const selectedDoctorUpcoming = selectedDoctor
+    ? appointments.filter(a => a.doctor === selectedDoctor.name && a.status !== "Cancelled" && a.date >= todayDate).length
+    : 0;
 
   const stats = {
     total: appointments.length,
@@ -291,22 +294,64 @@ export default function HospitalApp() {
           </header>
           <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0' }}>
             {landingSection === 'home' && (
-              <div style={{ width: '100%', maxWidth: 1120, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center', background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', overflow: 'hidden' }}>
-              <div style={{ padding: '56px 48px' }}>
-                <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#10b981', marginBottom: 18 }}>Trusted Doctors, Modern Care</div>
-                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 52, lineHeight: 1.02, margin: 0, color: '#0f172a' }}>Book Appointment with Trusted Doctor</h1>
-                <p style={{ fontSize: 18, lineHeight: 1.8, color: '#475569', marginTop: 20, maxWidth: 520 }}>Connect with experienced specialists, schedule appointments instantly, and receive care from a trusted medical team at MediCarePlus.</p>
-                <button className="btn-primary" style={{ marginTop: 30, padding: '16px 26px', fontSize: 16 }} onClick={() => { setAuthRole('patient'); setScreen('login'); setAuthForm(INITIAL_AUTH_FORM); }}>
-                  Book Appointment
-                </button>
-              </div>
-              <div style={{ minHeight: 440, background: 'linear-gradient(180deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: '100%', height: '100%', backgroundImage: "url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\"%3E%3Cdefs%3E%3ClinearGradient id=\"hbg\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"1\"%3E%3Cstop offset=\"0%\" stop-color=\"%23f8fbff\"/%3E%3Cstop offset=\"1\" stop-color=\"%23dbeefa\"/%3E%3C/linearGradient%3E%3ClinearGradient id=\"haccent\" x1=\"0%\" y1=\"0%\" x2=\"1%\" y2=\"1%\"%3E%3Cstop offset=\"0%\" stop-color=\"%231e40af\" stop-opacity=\"0.14\"/%3E%3Cstop offset=\"1%\" stop-color=\"%2310b981\" stop-opacity=\"0.08\"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\"800\" height=\"600\" rx=\"32\" fill=\"url(%23hbg)\"/%3E%3Cpath d=\"M140 180h520v300H140z\" fill=\"%23ffffff\" stroke=\"%23cbd5e1\" stroke-width=\"3\"/%3E%3Crect x=\"180\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"340\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"500\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"360\" y=\"150\" width=\"140\" height=\"110\" rx=\"26\" fill=\"%231e40af\"/%3E%3Cpath d=\"M400 180h60M430 150v100\" stroke=\"%23ffffff\" stroke-width=\"16\" stroke-linecap=\"round\"/%3E%3Ccircle cx=\"430\" cy=\"80\" r=\"56\" fill=\"%2310b981\"/%3E%3Cpath d=\"M430 58v44M400 80h60\" stroke=\"%23ffffff\" stroke-width=\"14\" stroke-linecap=\"round\"/%3E%3Cpath d=\"M100 420h600v40H100z\" fill=\"url(%23haccent)\" opacity=\"0.22\"/%3E%3C/svg%3E')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }} />
-              </div>
-            </div>
+
+              <div style={{ width: '100%', maxWidth: 1120, background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', overflow: 'hidden' }}>
+                <div style={{ padding: '44px 48px 0' }}>
+                  <div style={{ fontSize: 20, fontWeight: 700, letterSpacing: '0.02em', color: '#0f172a', marginBottom: 12, lineHeight: 1.4 }}>“Wellness is the first step toward every life you want to live.”</div>
+                </div>
+                <div style={{ padding: '0 48px 20px', display: 'grid', gap: 22, maxWidth: 680 }}>
+                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 52, lineHeight: 1.02, margin: 0, color: '#0f172a' }}>Book Appointment with Trusted Doctor</h1>
+                  <p style={{ fontSize: 18, lineHeight: 1.8, color: '#475569', margin: 0 }}>Connect with experienced specialists, schedule appointments instantly, and receive care from a trusted medical team at MediCarePlus.</p>
+                  <button className="btn-primary" style={{ width: 'fit-content', marginTop: 8, padding: '16px 26px', fontSize: 16 }} onClick={() => { setAuthRole('patient'); setScreen('login'); setAuthForm(INITIAL_AUTH_FORM); }}>
+                    Book Appointment
+                  </button>
+                </div>
+               <div
+  style={{
+    padding: '0 48px 48px',
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <div
+    style={{
+      position: 'relative',
+      width: '100%',
+      maxWidth: 520,
+    }}
+  >
+    <img
+      src="https://img.freepik.com/free-photo/portrait-doctor-with-stethoscope-standing-hospital_107420-84726.jpg"
+      alt="Doctor caring for patient"
+      style={{
+        width: '100%',
+        borderRadius: 24,
+        boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+        objectFit: 'cover'
+      }}
+    />
+
+    <div
+      style={{
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        right: 20,
+        background: 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(6px)',
+        padding: '12px 18px',
+        borderRadius: 14,
+        fontSize: 18,
+        fontWeight: 700,
+        color: '#1e40af',
+        textAlign: 'center',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+      }}
+    >
+      “Wellness is the first step toward every life you want to live.”
+    </div>
+  </div>
+</div>
             )}
             {landingSection === 'alldoctors' && (
               <div style={{ width: '100%', maxWidth: 1120, padding: '20px 0' }}>
@@ -783,8 +828,8 @@ export default function HospitalApp() {
                 <span style={{ background: COLORS[selectedDoctor.specialty] + "22", color: COLORS[selectedDoctor.specialty], padding: "3px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>{selectedDoctor.specialty}</span>
               </div>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 }}>
-              {[{ label: "Rating", value: `★ ${selectedDoctor.rating}` }, { label: "Experience", value: selectedDoctor.exp }, { label: "Total Patients", value: selectedDoctor.patients }].map(i => (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 12, marginBottom: 20 }}>
+              {[{ label: "Rating", value: `★ ${selectedDoctor.rating}` }, { label: "Experience", value: selectedDoctor.exp }, { label: "Total Patients", value: selectedDoctor.patients }, { label: "Upcoming", value: selectedDoctorUpcoming }].map(i => (
                 <div key={i.label} style={{ background: "#f8fafc", borderRadius: 10, padding: "14px", textAlign: "center" }}>
                   <div style={{ fontSize: 18, fontWeight: 700, color: "#1e40af" }}>{i.value}</div>
                   <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 4 }}>{i.label}</div>
