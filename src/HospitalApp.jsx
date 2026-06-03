@@ -21,7 +21,6 @@ const PATIENTS = [
 
 const APPOINTMENTS_INIT = [];
 
-const TIMES = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
 const TYPES = ["Consultation", "Follow-up", "Routine Check", "Emergency", "Lab Results"];
 
 const COLORS = {
@@ -50,7 +49,6 @@ const INITIAL_BOOKING_FORM = { patient: "", doctor: "", date: "", time: "", type
 export default function HospitalApp() {
   const [screen, setScreen] = useState("role");
   const [authRole, setAuthRole] = useState("patient");
-  const [authMode, setAuthMode] = useState("login");
   const [patientsData, setPatientsData] = useState(PATIENTS);
   const [adminsData, setAdminsData] = useState(INITIAL_ADMINS);
   const [patientUser, setPatientUser] = useState(null);
@@ -58,7 +56,6 @@ export default function HospitalApp() {
   const [appointments, setAppointments] = useState(APPOINTMENTS_INIT);
   const [showBooking, setShowBooking] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
-  const [searchPatient, setSearchPatient] = useState("");
   const [searchDoctor, setSearchDoctor] = useState("");
   const [landingSection, setLandingSection] = useState("home");
   const [authForm, setAuthForm] = useState(INITIAL_AUTH_FORM);
@@ -75,7 +72,6 @@ export default function HospitalApp() {
     setScreen("role");
     setLandingSection("home");
     setAuthRole("patient");
-    setAuthMode("login");
     setAuthForm(INITIAL_AUTH_FORM);
     setPatientUser(null);
     setTab("dashboard");
@@ -190,11 +186,6 @@ export default function HospitalApp() {
     showToast("Appointment confirmed!");
   };
 
-  const filteredPatients = patientsData.filter(p =>
-    p.name.toLowerCase().includes(searchPatient.toLowerCase()) ||
-    p.condition.toLowerCase().includes(searchPatient.toLowerCase())
-  );
-
   const filteredDoctors = DOCTORS.filter(d =>
     d.name.toLowerCase().includes(searchDoctor.toLowerCase()) ||
     d.specialty.toLowerCase().includes(searchDoctor.toLowerCase())
@@ -284,7 +275,6 @@ export default function HospitalApp() {
                     if (item === 'Admin') {
                       setAuthRole('admin');
                       setScreen('login');
-                      setAuthMode('login');
                       setAuthForm(INITIAL_AUTH_FORM);
                       return;
                     }
@@ -294,7 +284,7 @@ export default function HospitalApp() {
                   {item}
                 </button>
               ))}
-              <button className="btn-primary" style={{ padding: '10px 18px', fontSize: 14 }} onClick={() => { setAuthRole('patient'); setScreen('signup'); setAuthMode('signup'); setAuthForm(INITIAL_AUTH_FORM); }}>
+              <button className="btn-primary" style={{ padding: '10px 18px', fontSize: 14 }} onClick={() => { setAuthRole('patient'); setScreen('signup'); setAuthForm(INITIAL_AUTH_FORM); }}>
                 Create Account
               </button>
             </nav>
@@ -302,24 +292,21 @@ export default function HospitalApp() {
           <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0' }}>
             {landingSection === 'home' && (
               <div style={{ width: '100%', maxWidth: 1120, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center', background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', overflow: 'hidden' }}>
-                <div style={{ padding: '56px 48px' }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#10b981', marginBottom: 18 }}>Trusted Doctors, Modern Care</div>
-                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 52, lineHeight: 1.02, margin: 0, color: '#0f172a' }}>Book Appointment with Trusted Doctor</h1>
-                  <p style={{ fontSize: 18, lineHeight: 1.8, color: '#475569', marginTop: 20, maxWidth: 520 }}>Connect with experienced specialists, schedule appointments instantly, and receive care from a trusted medical team at MediCarePlus.</p>
-                  <button className="btn-primary" style={{ marginTop: 30, padding: '16px 26px', fontSize: 16 }} onClick={() => { setAuthRole('patient'); setScreen('login'); setAuthMode('login'); setAuthForm(INITIAL_AUTH_FORM); }}>
-                    Book Appointment
-                  </button>
-                </div>
-                <div style={{ minHeight: 440, background: 'linear-gradient(180deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-                  <div style={{ width: '100%', maxWidth: 420, minHeight: 380, borderRadius: 32, overflow: 'hidden', background: '#ffffff', boxShadow: '0 24px 60px rgba(15,23,42,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img
-                      src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=520&q=80"
-                      alt="Doctor in clinic"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                </div>
+              <div style={{ padding: '56px 48px' }}>
+                <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#10b981', marginBottom: 18 }}>Trusted Doctors, Modern Care</div>
+                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 52, lineHeight: 1.02, margin: 0, color: '#0f172a' }}>Book Appointment with Trusted Doctor</h1>
+                <p style={{ fontSize: 18, lineHeight: 1.8, color: '#475569', marginTop: 20, maxWidth: 520 }}>Connect with experienced specialists, schedule appointments instantly, and receive care from a trusted medical team at MediCarePlus.</p>
+                <button className="btn-primary" style={{ marginTop: 30, padding: '16px 26px', fontSize: 16 }} onClick={() => { setAuthRole('patient'); setScreen('login'); setAuthForm(INITIAL_AUTH_FORM); }}>
+                  Book Appointment
+                </button>
               </div>
+              <div style={{ minHeight: 440, background: 'linear-gradient(180deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '100%', height: '100%', backgroundImage: "url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\"%3E%3Cdefs%3E%3ClinearGradient id=\"hbg\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"1\"%3E%3Cstop offset=\"0%\" stop-color=\"%23f8fbff\"/%3E%3Cstop offset=\"1\" stop-color=\"%23dbeefa\"/%3E%3C/linearGradient%3E%3ClinearGradient id=\"haccent\" x1=\"0%\" y1=\"0%\" x2=\"1%\" y2=\"1%\"%3E%3Cstop offset=\"0%\" stop-color=\"%231e40af\" stop-opacity=\"0.14\"/%3E%3Cstop offset=\"1%\" stop-color=\"%2310b981\" stop-opacity=\"0.08\"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\"800\" height=\"600\" rx=\"32\" fill=\"url(%23hbg)\"/%3E%3Cpath d=\"M140 180h520v300H140z\" fill=\"%23ffffff\" stroke=\"%23cbd5e1\" stroke-width=\"3\"/%3E%3Crect x=\"180\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"340\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"500\" y=\"230\" width=\"160\" height=\"210\" rx=\"18\" fill=\"%23eff6ff\"/%3E%3Crect x=\"360\" y=\"150\" width=\"140\" height=\"110\" rx=\"26\" fill=\"%231e40af\"/%3E%3Cpath d=\"M400 180h60M430 150v100\" stroke=\"%23ffffff\" stroke-width=\"16\" stroke-linecap=\"round\"/%3E%3Ccircle cx=\"430\" cy=\"80\" r=\"56\" fill=\"%2310b981\"/%3E%3Cpath d=\"M430 58v44M400 80h60\" stroke=\"%23ffffff\" stroke-width=\"14\" stroke-linecap=\"round\"/%3E%3Cpath d=\"M100 420h600v40H100z\" fill=\"url(%23haccent)\" opacity=\"0.22\"/%3E%3C/svg%3E')",
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }} />
+              </div>
+            </div>
             )}
             {landingSection === 'alldoctors' && (
               <div style={{ width: '100%', maxWidth: 1120, padding: '20px 0' }}>
@@ -397,7 +384,7 @@ export default function HospitalApp() {
               </div>
               <button className="btn-primary" style={{ width: "100%" }} onClick={authRole === "admin" ? handleAdminLogin : handlePatientLogin}>Sign In</button>
               <div style={{ fontSize: 13, color: "#64748b", textAlign: "center" }}>
-                New {authRole === "patient" ? "patient" : "admin"}? <button className="btn-ghost" style={{ fontSize: 13, padding: "6px 10px" }} onClick={() => { setAuthMode("signup"); setScreen("signup"); }}>{authRole === "patient" ? "Create an account" : "Create admin account"}</button>
+                New {authRole === "patient" ? "patient" : "admin"}? <button className="btn-ghost" style={{ fontSize: 13, padding: "6px 10px" }} onClick={() => { setScreen("signup"); }}>{authRole === "patient" ? "Create an account" : "Create admin account"}</button>
               </div>
             </div>
           </div>
