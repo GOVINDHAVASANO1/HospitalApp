@@ -7,6 +7,8 @@ const DOCTORS = [
   { id: 4, name: "Dr. Harini Ramachandran", specialty: "Pediatrics", avatar: "HR", available: ["Wed", "Fri", "Sat"], times: ["09:00 AM", "01:00 PM", "03:00 PM"], rating: 4.9, exp: "16 yrs", patients: 1550 },
   { id: 5, name: "Dr. Subashini Natarajan", specialty: "Dermatology", avatar: "SN", available: ["Mon", "Thu", "Fri"], times: ["10:00 AM", "12:00 PM", "02:00 PM"], rating: 4.6, exp: "7 yrs", patients: 720 },
   { id: 6, name: "Dr. Karthik Venkatesan", specialty: "General Medicine", avatar: "KV", available: ["Tue", "Wed", "Sat"], times: ["09:00 AM", "11:00 AM", "01:00 PM"], rating: 4.8, exp: "12 yrs", patients: 1100 },
+  { id: 7, name: "Dr. Priya Natarajan", specialty: "Ophthalmology", avatar: "PN", available: ["Mon", "Wed", "Fri"], times: ["10:00 AM", "12:30 PM", "03:00 PM"], rating: 4.7, exp: "10 yrs", patients: 810 },
+  { id: 8, name: "Dr. Rohan Chandra", specialty: "Gastroenterology", avatar: "RC", available: ["Tue", "Thu", "Sat"], times: ["09:30 AM", "01:00 PM", "03:30 PM"], rating: 4.8, exp: "13 yrs", patients: 940 },
 ];
 
 const PATIENTS = [
@@ -29,6 +31,8 @@ const COLORS = {
   Pediatrics: "#10b981",
   Dermatology: "#ec4899",
   "General Medicine": "#3b82f6",
+  Ophthalmology: "#eab308",
+  Gastroenterology: "#14b8a6",
 };
 
 const statusColor = {
@@ -56,6 +60,7 @@ export default function HospitalApp() {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [searchPatient, setSearchPatient] = useState("");
   const [searchDoctor, setSearchDoctor] = useState("");
+  const [landingSection, setLandingSection] = useState("home");
   const [authForm, setAuthForm] = useState(INITIAL_AUTH_FORM);
   const [form, setForm] = useState(INITIAL_BOOKING_FORM);
   const [toast, setToast] = useState(null);
@@ -68,6 +73,7 @@ export default function HospitalApp() {
 
   const resetSession = () => {
     setScreen("role");
+    setLandingSection("home");
     setAuthRole("patient");
     setAuthMode("login");
     setAuthForm(INITIAL_AUTH_FORM);
@@ -220,14 +226,14 @@ export default function HospitalApp() {
 
   return (
     <div style={{
-      fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+      fontFamily: "'Inter', 'Segoe UI', sans-serif",
       background: "linear-gradient(180deg, #e6f2fb 0%, #f7fbff 58%, #ffffff 100%)",
       backgroundImage: "radial-gradient(circle at top left, rgba(30,64,175,0.16) 0%, transparent 24%), radial-gradient(circle at 80% 18%, rgba(16,185,129,0.12) 0%, transparent 20%), radial-gradient(circle at 18% 82%, rgba(59,130,246,0.1) 0%, transparent 18%)",
       minHeight: "100vh",
       color: "#1e2d3d"
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #f7fbff; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         .nav-btn { background: none; border: none; cursor: pointer; padding: 10px 18px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 8px; color: #64748b; }
@@ -259,28 +265,108 @@ export default function HospitalApp() {
         <div style={{
           minHeight: "100vh",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "40px 24px",
-          backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"1600\" height=\"900\" viewBox=\"0 0 1600 900\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cdefs%3E%3ClinearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%23ffffff\"/%3E%3Cstop offset=\"100%\" stop-color=\"%23dbeefa\"/%3E%3C/linearGradient%3E%3ClinearGradient id=\"g2\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%231e40af\" stop-opacity=\"0.14\"/%3E%3Cstop offset=\"100%\" stop-color=\"%2310b981\" stop-opacity=\"0.08\"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\"1600\" height=\"900\" fill=\"url(%23g1)\"/%3E%3Cpath d=\"M320 560h960v180H320z\" fill=\"%23ffffff\" opacity=\"0.9\"/%3E%3Cpath d=\"M360 520h160v60H360zM1080 520h160v60h-160z\" fill=\"%231e40af\" opacity=\"0.24\"/%3E%3Crect x=\"520\" y=\"420\" width=\"560\" height=\"260\" rx=\"24\" fill=\"%23ffffff\" opacity=\"0.96\"/%3E%3Cpath d=\"M600 520h120v80H600zm280 0h120v80h-120z\" fill=\"%231e40af\" opacity=\"0.18\"/%3E%3Crect x=\"680\" y=\"360\" width=\"240\" height=\"80\" rx=\"16\" fill=\"%231e40af\"/%3E%3Cpath d=\"M760 424h80v56h-80z\" fill=\"%23ffffff\"/%3E%3Crect x=\"620\" y=\"500\" width=\"100\" height=\"120\" rx=\"16\" fill=\"%231e40af\" opacity=\"0.12\"/%3E%3Crect x=\"880\" y=\"500\" width=\"100\" height=\"120\" rx=\"16\" fill=\"%231e40af\" opacity=\"0.12\"/%3E%3Cpath d=\"M760 440h40v40h-40z\" fill=\"%23ffffff\"/%3E%3Cpath d=\"M1400 0L1200 260l150 120 160-260z\" fill=\"url(%23g2)\"/%3E%3Cpath d=\"M0 140L260 0l140 180L0 320z\" fill=\"url(%23g2)\"/%3E%3C/svg%3E')",
+          flexDirection: "column",
+          padding: "24px 32px",
+          backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"1600\" height=\"900\" viewBox=\"0 0 1600 900\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cdefs%3E%3ClinearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%23ffffff\"/%3E%3Cstop offset=\"100%\" stop-color=\"%23dbeefa\"/%3E%3C/linearGradient%3E%3ClinearGradient id=\"g2\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%231e40af\" stop-opacity=\"0.14\"/%3E%3Cstop offset=\"100%\" stop-color=\"%2310b981\" stop-opacity=\"0.08\"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\"1600\" height=\"900\" fill=\"url(%23g1)\"/%3E%3Cpath d=\"M0 720C160 660 320 620 480 640c160 20 320 100 480 90s320-130 480-180V900H0z\" fill=\"%231e40af\" opacity=\"0.08\"/%3E%3Cpath d=\"M0 620C150 560 310 520 470 540c160 20 320 90 480 80s320-120 480-170V900H0z\" fill=\"%2310b981\" opacity=\"0.06\"/%3E%3C/svg%3E')",
           backgroundSize: "cover",
-          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          color: "#1e2d3d",
         }}>
-          <div style={{ width: "100%", maxWidth: 520 }}>
-            <div style={{ marginBottom: 24, overflow: "hidden", borderRadius: 24, boxShadow: "0 24px 60px rgba(15, 23, 42, 0.12)" }}>
-              <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef6ff'/%3E%3Cstop offset='1' stop-color='%23dbeefa'/%3E%3C/linearGradient%3E%3ClinearGradient id='accent' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231e40af' stop-opacity='0.18'/%3E%3Cstop offset='1' stop-color='%2310b981' stop-opacity='0.08'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23bg)'/%3E%3Cpath d='M120 160h560v340H120z' fill='%23ffffff' stroke='%23cbd5e1' stroke-width='3'/%3E%3Crect x='200' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='340' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='480' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='320' y='140' width='160' height='120' rx='24' fill='%231e40af'/%3E%3Cpath d='M360 180h80M400 140v120' stroke='%23ffffff' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='400' cy='80' r='60' fill='%2310b981'/%3E%3Cpath d='M400 55v50M375 80h50' stroke='%23ffffff' stroke-width='16' stroke-linecap='round'/%3E%3Cpath d='M140 260h520v100H140z' fill='url(%23accent)' opacity='0.28'/%3E%3Cpath d='M100 90L200 30l120 150L100 210z' fill='url(%23accent)' opacity='0.24'/%3E%3C/svg%3E"
-                alt="AI generated hospital illustration"
-                style={{ width: "100%", display: "block" }}
-              />
-            </div>
-            <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 36, fontWeight: 800, marginBottom: 24, color: "#1e2d3d" }}>Welcome to MediCare+</h1>
-            <div className="card" style={{ padding: 32 }}>
-              <button className="btn-primary" style={{ width: "100%", marginBottom: 12 }} onClick={() => { setAuthRole("admin"); setScreen("login"); setAuthMode("login"); setAuthForm(INITIAL_AUTH_FORM); }}>Admin Login</button>
-              <button className="btn-primary" style={{ width: "100%" }} onClick={() => { setAuthRole("patient"); setScreen("login"); setAuthMode("login"); setAuthForm(INITIAL_AUTH_FORM); }}>Patient Login</button>
-            </div>
-          </div>
+          <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: 1200, margin: "0 auto", width: "100%", paddingBottom: 16 }}>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 24, fontWeight: 800, color: "#1e40af" }}>MediCarePlus</div>
+            <nav style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+              {['Home', 'Admin', 'All Doctors', 'About', 'Contact'].map(item => (
+                <button
+                  key={item}
+                  className="btn-ghost"
+                  style={{ padding: '10px 14px', fontSize: 14, opacity: item === 'Admin' ? 0.9 : landingSection === item.toLowerCase().replace(' ', '') ? 1 : 0.8 }}
+                  onClick={() => {
+                    if (item === 'Admin') {
+                      setAuthRole('admin');
+                      setScreen('login');
+                      setAuthMode('login');
+                      setAuthForm(INITIAL_AUTH_FORM);
+                      return;
+                    }
+                    setLandingSection(item.toLowerCase().replace(' ', ''))
+                  }}
+                >
+                  {item}
+                </button>
+              ))}
+              <button className="btn-primary" style={{ padding: '10px 18px', fontSize: 14 }} onClick={() => { setAuthRole('patient'); setScreen('signup'); setAuthMode('signup'); setAuthForm(INITIAL_AUTH_FORM); }}>
+                Create Account
+              </button>
+            </nav>
+          </header>
+          <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0' }}>
+            {landingSection === 'home' && (
+              <div style={{ width: '100%', maxWidth: 1120, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center', background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', overflow: 'hidden' }}>
+                <div style={{ padding: '56px 48px' }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#10b981', marginBottom: 18 }}>Trusted Doctors, Modern Care</div>
+                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 52, lineHeight: 1.02, margin: 0, color: '#0f172a' }}>Book Appointment with Trusted Doctor</h1>
+                  <p style={{ fontSize: 18, lineHeight: 1.8, color: '#475569', marginTop: 20, maxWidth: 520 }}>Connect with experienced specialists, schedule appointments instantly, and receive care from a trusted medical team at MediCarePlus.</p>
+                  <button className="btn-primary" style={{ marginTop: 30, padding: '16px 26px', fontSize: 16 }} onClick={() => { setAuthRole('patient'); setScreen('login'); setAuthMode('login'); setAuthForm(INITIAL_AUTH_FORM); }}>
+                    Book Appointment
+                  </button>
+                </div>
+                <div style={{ minHeight: 440, background: 'linear-gradient(180deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08))', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+                  <div style={{ width: '100%', maxWidth: 420, minHeight: 380, borderRadius: 32, overflow: 'hidden', background: '#ffffff', boxShadow: '0 24px 60px rgba(15,23,42,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img
+                      src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=520&q=80"
+                      alt="Doctor in clinic"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            {landingSection === 'alldoctors' && (
+              <div style={{ width: '100%', maxWidth: 1120, padding: '20px 0' }}>
+                <div style={{ marginBottom: 24 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#10b981', marginBottom: 8 }}>Available Doctors</div>
+                  <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 36, margin: 0, color: '#0f172a' }}>Meet our medical specialists</h2>
+                  <p style={{ fontSize: 16, lineHeight: 1.75, color: '#475569', marginTop: 14, maxWidth: 680 }}>Browse our trusted doctor profiles and choose the right specialist for your care. All available doctors are listed below with their experience and schedules.</p>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+                  {DOCTORS.map(d => (
+                    <div key={d.id} className="card doc-card" style={{ padding: 22, borderRadius: 22 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 18 }}>
+                        <div style={{ width: 56, height: 56, borderRadius: '50%', background: COLORS[d.specialty] + '22', color: COLORS[d.specialty], display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700 }}>{d.avatar}</div>
+                        <div>
+                          <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a' }}>{d.name}</div>
+                          <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>{d.specialty}</div>
+                        </div>
+                      </div>
+                      <div style={{ display: 'grid', gap: 10, marginBottom: 18 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: 14 }}><span>Rating</span><span>{d.rating}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: 14 }}><span>Experience</span><span>{d.exp}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: 14 }}><span>Patients</span><span>{d.patients}</span></div>
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                        {d.available.map(day => (
+                          <span key={day} style={{ padding: '6px 10px', borderRadius: 999, background: '#eef2ff', color: '#1e40af', fontSize: 12, fontWeight: 600 }}>{day}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {landingSection === 'about' && (
+              <div style={{ width: '100%', maxWidth: 1120, background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', padding: 48 }}>
+                <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 42, margin: 0, color: '#0f172a' }}>About MediCarePlus</h2>
+                <p style={{ fontSize: 17, color: '#475569', lineHeight: 1.8, marginTop: 22 }}>MediCarePlus is a modern clinic experience built to connect patients with trusted specialists, simplify appointment booking, and deliver compassionate care across multiple departments.</p>
+              </div>
+            )}
+            {landingSection === 'contact' && (
+              <div style={{ width: '100%', maxWidth: 1120, background: 'rgba(255,255,255,0.96)', borderRadius: 28, boxShadow: '0 30px 80px rgba(15, 23, 42, 0.16)', padding: 48 }}>
+                <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 42, margin: 0, color: '#0f172a' }}>Contact Us</h2>
+                <p style={{ fontSize: 17, color: '#475569', lineHeight: 1.8, marginTop: 22 }}>Email: support@medicareplus.com</p>
+                <p style={{ fontSize: 17, color: '#475569', lineHeight: 1.8, marginTop: 10 }}>Phone: +91 8870796121</p>
+              </div>
+            )}
+          </main>
         </div>
       )}
 
