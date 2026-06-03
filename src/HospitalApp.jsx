@@ -1,28 +1,23 @@
 import { useState } from "react";
 
 const DOCTORS = [
-  { id: 1, name: "Dr. Aisha Patel", specialty: "Cardiology", avatar: "AP", available: ["Mon", "Wed", "Fri"], rating: 4.9, exp: "14 yrs", patients: 1240 },
-  { id: 2, name: "Dr. Marcus Chen", specialty: "Neurology", avatar: "MC", available: ["Tue", "Thu", "Sat"], rating: 4.8, exp: "11 yrs", patients: 980 },
-  { id: 3, name: "Dr. Sofia Russo", specialty: "Orthopedics", avatar: "SR", available: ["Mon", "Tue", "Thu"], rating: 4.7, exp: "9 yrs", patients: 870 },
-  { id: 4, name: "Dr. James Okafor", specialty: "Pediatrics", avatar: "JO", available: ["Wed", "Fri", "Sat"], rating: 4.9, exp: "16 yrs", patients: 1550 },
-  { id: 5, name: "Dr. Priya Nair", specialty: "Dermatology", avatar: "PN", available: ["Mon", "Thu", "Fri"], rating: 4.6, exp: "7 yrs", patients: 720 },
-  { id: 6, name: "Dr. Ethan Brooks", specialty: "General Medicine", avatar: "EB", available: ["Tue", "Wed", "Sat"], rating: 4.8, exp: "12 yrs", patients: 1100 },
+  { id: 1, name: "Dr. Arjun Kumar", specialty: "Cardiology", avatar: "AK", available: ["Mon", "Wed", "Fri"], times: ["09:00 AM", "11:00 AM", "02:00 PM"], rating: 4.9, exp: "14 yrs", patients: 1240 },
+  { id: 2, name: "Dr. Kavya Ramesh", specialty: "Neurology", avatar: "KR", available: ["Tue", "Thu", "Sat"], times: ["10:00 AM", "12:00 PM", "03:00 PM"], rating: 4.8, exp: "11 yrs", patients: 980 },
+  { id: 3, name: "Dr. Meena Srinivasan", specialty: "Orthopedics", avatar: "MS", available: ["Mon", "Tue", "Thu"], times: ["09:30 AM", "11:30 AM", "02:30 PM"], rating: 4.7, exp: "9 yrs", patients: 870 },
+  { id: 4, name: "Dr. Harini Ramachandran", specialty: "Pediatrics", avatar: "HR", available: ["Wed", "Fri", "Sat"], times: ["09:00 AM", "01:00 PM", "03:00 PM"], rating: 4.9, exp: "16 yrs", patients: 1550 },
+  { id: 5, name: "Dr. Subashini Natarajan", specialty: "Dermatology", avatar: "SN", available: ["Mon", "Thu", "Fri"], times: ["10:00 AM", "12:00 PM", "02:00 PM"], rating: 4.6, exp: "7 yrs", patients: 720 },
+  { id: 6, name: "Dr. Karthik Venkatesan", specialty: "General Medicine", avatar: "KV", available: ["Tue", "Wed", "Sat"], times: ["09:00 AM", "11:00 AM", "01:00 PM"], rating: 4.8, exp: "12 yrs", patients: 1100 },
 ];
 
 const PATIENTS = [
-  { id: 1, name: "Liam Henderson", age: 45, blood: "A+", phone: "+1 555-0101", condition: "Hypertension", lastVisit: "2026-05-12", status: "Active" },
-  { id: 2, name: "Olivia Martins", age: 32, blood: "O-", phone: "+1 555-0182", condition: "Diabetes Type II", lastVisit: "2026-05-28", status: "Active" },
-  { id: 3, name: "Noah Williams", age: 67, blood: "B+", phone: "+1 555-0234", condition: "Arthritis", lastVisit: "2026-04-30", status: "Inactive" },
-  { id: 4, name: "Emma Thompson", age: 28, blood: "AB+", phone: "+1 555-0312", condition: "Migraine", lastVisit: "2026-05-20", status: "Active" },
-  { id: 5, name: "Ava Johnson", age: 55, blood: "A-", phone: "+1 555-0445", condition: "Asthma", lastVisit: "2026-05-05", status: "Active" },
+  { id: 1, name: "Liam Henderson", age: 45, blood: "A+", phone: "+1 555-0101", condition: "Hypertension", lastVisit: "2026-05-12", status: "Active", email: "liam.henderson@example.com", password: "patient123" },
+  { id: 2, name: "Olivia Martins", age: 32, blood: "O-", phone: "+1 555-0182", condition: "Diabetes Type II", lastVisit: "2026-05-28", status: "Active", email: "olivia.martins@example.com", password: "patient123" },
+  { id: 3, name: "Noah Williams", age: 67, blood: "B+", phone: "+1 555-0234", condition: "Arthritis", lastVisit: "2026-04-30", status: "Inactive", email: "noah.williams@example.com", password: "patient123" },
+  { id: 4, name: "Emma Thompson", age: 28, blood: "AB+", phone: "+1 555-0312", condition: "Migraine", lastVisit: "2026-05-20", status: "Active", email: "emma.thompson@example.com", password: "patient123" },
+  { id: 5, name: "Ava Johnson", age: 55, blood: "A-", phone: "+1 555-0445", condition: "Asthma", lastVisit: "2026-05-05", status: "Active", email: "ava.johnson@example.com", password: "patient123" },
 ];
 
-const APPOINTMENTS_INIT = [
-  { id: 1, patient: "Liam Henderson", doctor: "Dr. Aisha Patel", date: "2026-06-05", time: "10:00 AM", type: "Follow-up", status: "Confirmed" },
-  { id: 2, patient: "Olivia Martins", doctor: "Dr. Marcus Chen", date: "2026-06-06", time: "02:30 PM", type: "Consultation", status: "Pending" },
-  { id: 3, patient: "Emma Thompson", doctor: "Dr. James Okafor", date: "2026-06-07", time: "09:00 AM", type: "Routine Check", status: "Confirmed" },
-  { id: 4, patient: "Ava Johnson", doctor: "Dr. Priya Nair", date: "2026-06-08", time: "11:00 AM", type: "Follow-up", status: "Cancelled" },
-];
+const APPOINTMENTS_INIT = [];
 
 const TIMES = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
 const TYPES = ["Consultation", "Follow-up", "Routine Check", "Emergency", "Lab Results"];
@@ -36,16 +31,33 @@ const COLORS = {
   "General Medicine": "#3b82f6",
 };
 
-const statusColor = { Confirmed: "#10b981", Pending: "#f59e0b", Cancelled: "#ef4444" };
+const statusColor = {
+  Confirmed: "#10b981",
+  Pending: "#f59e0b",
+  Cancelled: "#ef4444",
+};
+
+const INITIAL_ADMINS = [
+  { id: 1, name: "Admin User", email: "admin@medicare.com", password: "Admin123", hospitalId: "MED123" },
+];
+const INITIAL_AUTH_FORM = { email: "", password: "", confirmPassword: "", name: "", phone: "", blood: "", hospitalId: "" };
+const INITIAL_BOOKING_FORM = { patient: "", doctor: "", date: "", time: "", type: "Consultation" };
 
 export default function HospitalApp() {
+  const [screen, setScreen] = useState("role");
+  const [authRole, setAuthRole] = useState("patient");
+  const [authMode, setAuthMode] = useState("login");
+  const [patientsData, setPatientsData] = useState(PATIENTS);
+  const [adminsData, setAdminsData] = useState(INITIAL_ADMINS);
+  const [patientUser, setPatientUser] = useState(null);
   const [tab, setTab] = useState("dashboard");
   const [appointments, setAppointments] = useState(APPOINTMENTS_INIT);
   const [showBooking, setShowBooking] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [searchPatient, setSearchPatient] = useState("");
   const [searchDoctor, setSearchDoctor] = useState("");
-  const [form, setForm] = useState({ patient: "", doctor: "", date: "", time: "", type: "Consultation" });
+  const [authForm, setAuthForm] = useState(INITIAL_AUTH_FORM);
+  const [form, setForm] = useState(INITIAL_BOOKING_FORM);
   const [toast, setToast] = useState(null);
   const [patientModal, setPatientModal] = useState(null);
 
@@ -54,15 +66,111 @@ export default function HospitalApp() {
     setTimeout(() => setToast(null), 3000);
   };
 
+  const resetSession = () => {
+    setScreen("role");
+    setAuthRole("patient");
+    setAuthMode("login");
+    setAuthForm(INITIAL_AUTH_FORM);
+    setPatientUser(null);
+    setTab("dashboard");
+    setShowBooking(false);
+    setSelectedDoctor(null);
+    setPatientModal(null);
+    setForm(INITIAL_BOOKING_FORM);
+  };
+
+  const handleAdminLogin = () => {
+    const admin = adminsData.find(a => a.email === authForm.email && a.password === authForm.password && a.hospitalId === authForm.hospitalId);
+    if (!admin) {
+      showToast("Invalid admin credentials or Hospital ID", "#ef4444");
+      return;
+    }
+    setScreen("adminHome");
+    setTab("dashboard");
+    setAuthForm(INITIAL_AUTH_FORM);
+    showToast("Admin signed in successfully!");
+  };
+
+  const handlePatientLogin = () => {
+    const patient = patientsData.find(p => p.email === authForm.email && p.password === authForm.password);
+    if (!patient) {
+      showToast("Email or password is incorrect", "#ef4444");
+      return;
+    }
+    setPatientUser(patient);
+    setScreen("patientHome");
+    setAuthForm(INITIAL_AUTH_FORM);
+    setSearchDoctor("");
+    showToast(`Welcome back, ${patient.name}!`);
+  };
+
+  const handlePatientSignup = () => {
+    if (!authForm.name || !authForm.email || !authForm.password || !authForm.confirmPassword || !authForm.phone || !authForm.blood) {
+      showToast("Please complete all signup fields", "#ef4444");
+      return;
+    }
+    if (authForm.password !== authForm.confirmPassword) {
+      showToast("Passwords must match", "#ef4444");
+      return;
+    }
+    if (patientsData.some(p => p.email === authForm.email)) {
+      showToast("This email is already registered", "#ef4444");
+      return;
+    }
+    const newPatient = {
+      id: Date.now(),
+      name: authForm.name,
+      age: 30,
+      blood: authForm.blood,
+      phone: authForm.phone,
+      condition: "New patient",
+      lastVisit: "2026-06-01",
+      status: "Active",
+      email: authForm.email,
+      password: authForm.password,
+    };
+    setPatientsData(prev => [newPatient, ...prev]);
+    setPatientUser(newPatient);
+    setScreen("patientHome");
+    setAuthForm(INITIAL_AUTH_FORM);
+    showToast("Signup successful! Welcome to MediCare+");
+  };
+
+  const handleAdminSignup = () => {
+    if (!authForm.name || !authForm.email || !authForm.password || !authForm.confirmPassword || !authForm.hospitalId) {
+      showToast("Please complete all signup fields", "#ef4444");
+      return;
+    }
+    if (authForm.password !== authForm.confirmPassword) {
+      showToast("Passwords must match", "#ef4444");
+      return;
+    }
+    if (adminsData.some(a => a.email === authForm.email)) {
+      showToast("This admin email is already registered", "#ef4444");
+      return;
+    }
+    const newAdmin = {
+      id: Date.now(),
+      name: authForm.name,
+      email: authForm.email,
+      password: authForm.password,
+      hospitalId: authForm.hospitalId,
+    };
+    setAdminsData(prev => [newAdmin, ...prev]);
+    setScreen("adminHome");
+    setAuthForm(INITIAL_AUTH_FORM);
+    showToast("Admin signup successful! You are now signed in.");
+  };
+
   const bookAppointment = () => {
     if (!form.patient || !form.doctor || !form.date || !form.time) {
-      showToast("Please fill all fields", "#ef4444");
+      showToast("Please fill all appointment fields", "#ef4444");
       return;
     }
     const newApp = { id: Date.now(), ...form, status: "Pending" };
     setAppointments(p => [newApp, ...p]);
     setShowBooking(false);
-    setForm({ patient: "", doctor: "", date: "", time: "", type: "Consultation" });
+    setForm(INITIAL_BOOKING_FORM);
     showToast("Appointment booked successfully!");
   };
 
@@ -76,7 +184,7 @@ export default function HospitalApp() {
     showToast("Appointment confirmed!");
   };
 
-  const filteredPatients = PATIENTS.filter(p =>
+  const filteredPatients = patientsData.filter(p =>
     p.name.toLowerCase().includes(searchPatient.toLowerCase()) ||
     p.condition.toLowerCase().includes(searchPatient.toLowerCase())
   );
@@ -86,6 +194,12 @@ export default function HospitalApp() {
     d.specialty.toLowerCase().includes(searchDoctor.toLowerCase())
   );
 
+  const patientAppointments = patientUser ? appointments.filter(a => a.patient === patientUser.name) : [];
+  const today = new Date();
+  const todayDate = today.toISOString().split("T")[0];
+  const selectedDoctorData = DOCTORS.find(d => d.name === form.doctor);
+  const availableTimes = selectedDoctorData ? selectedDoctorData.times : [];
+
   const stats = {
     total: appointments.length,
     confirmed: appointments.filter(a => a.status === "Confirmed").length,
@@ -93,12 +207,29 @@ export default function HospitalApp() {
     cancelled: appointments.filter(a => a.status === "Cancelled").length,
   };
 
+  const openBooking = (doctorName = "") => {
+    setForm({
+      patient: patientUser ? patientUser.name : "",
+      doctor: doctorName,
+      date: "",
+      time: "",
+      type: "Consultation",
+    });
+    setShowBooking(true);
+  };
+
   return (
-    <div style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif", background: "#f0f4f8", minHeight: "100vh", color: "#1e2d3d" }}>
+    <div style={{
+      fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+      background: "linear-gradient(180deg, #e6f2fb 0%, #f7fbff 58%, #ffffff 100%)",
+      backgroundImage: "radial-gradient(circle at top left, rgba(30,64,175,0.16) 0%, transparent 24%), radial-gradient(circle at 80% 18%, rgba(16,185,129,0.12) 0%, transparent 20%), radial-gradient(circle at 18% 82%, rgba(59,130,246,0.1) 0%, transparent 18%)",
+      minHeight: "100vh",
+      color: "#1e2d3d"
+    }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #f0f4f8; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #f7fbff; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         .nav-btn { background: none; border: none; cursor: pointer; padding: 10px 18px; border-radius: 10px; font-family: inherit; font-size: 14px; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 8px; color: #64748b; }
         .nav-btn:hover { background: rgba(255,255,255,0.6); color: #1e2d3d; }
         .nav-btn.active { background: white; color: #1e40af; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -111,235 +242,318 @@ export default function HospitalApp() {
         .input { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 14px; color: #1e2d3d; outline: none; transition: border 0.2s; background: #f8fafc; }
         .input:focus { border-color: #1e40af; background: white; }
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
-        .modal { background: white; border-radius: 20px; padding: 32px; width: 480px; max-width: 94vw; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
+        .modal { background: white; border-radius: 20px; padding: 32px; width: 520px; max-width: 94vw; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .doc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important; }
         .doc-card { transition: all 0.2s; }
         select.input { appearance: none; }
       `}</style>
 
-      {/* Toast */}
       {toast && (
         <div style={{ position: "fixed", top: 24, right: 24, background: toast.color, color: "white", padding: "12px 22px", borderRadius: 12, fontWeight: 600, fontSize: 14, zIndex: 999, boxShadow: "0 8px 24px rgba(0,0,0,0.15)", animation: "slideUp 0.3s ease" }}>
           {toast.msg}
         </div>
       )}
 
-      {/* Sidebar */}
-      <div style={{ display: "flex", minHeight: "100vh" }}>
-        <aside style={{ width: 230, background: "white", borderRight: "1px solid #e8f0fe", padding: "24px 16px", display: "flex", flexDirection: "column", gap: 4, position: "fixed", top: 0, bottom: 0, left: 0, zIndex: 10 }}>
-          <div style={{ padding: "0 8px 24px", borderBottom: "1px solid #f1f5f9", marginBottom: 8 }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, color: "#1e40af", letterSpacing: "-0.5px" }}>MediCare+</div>
-            <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>Hospital Management</div>
+      {screen === "role" && (
+        <div style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "40px 24px",
+          backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"1600\" height=\"900\" viewBox=\"0 0 1600 900\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cdefs%3E%3ClinearGradient id=\"g1\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%23ffffff\"/%3E%3Cstop offset=\"100%\" stop-color=\"%23dbeefa\"/%3E%3C/linearGradient%3E%3ClinearGradient id=\"g2\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"%3E%3Cstop offset=\"0%\" stop-color=\"%231e40af\" stop-opacity=\"0.14\"/%3E%3Cstop offset=\"100%\" stop-color=\"%2310b981\" stop-opacity=\"0.08\"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=\"1600\" height=\"900\" fill=\"url(%23g1)\"/%3E%3Cpath d=\"M320 560h960v180H320z\" fill=\"%23ffffff\" opacity=\"0.9\"/%3E%3Cpath d=\"M360 520h160v60H360zM1080 520h160v60h-160z\" fill=\"%231e40af\" opacity=\"0.24\"/%3E%3Crect x=\"520\" y=\"420\" width=\"560\" height=\"260\" rx=\"24\" fill=\"%23ffffff\" opacity=\"0.96\"/%3E%3Cpath d=\"M600 520h120v80H600zm280 0h120v80h-120z\" fill=\"%231e40af\" opacity=\"0.18\"/%3E%3Crect x=\"680\" y=\"360\" width=\"240\" height=\"80\" rx=\"16\" fill=\"%231e40af\"/%3E%3Cpath d=\"M760 424h80v56h-80z\" fill=\"%23ffffff\"/%3E%3Crect x=\"620\" y=\"500\" width=\"100\" height=\"120\" rx=\"16\" fill=\"%231e40af\" opacity=\"0.12\"/%3E%3Crect x=\"880\" y=\"500\" width=\"100\" height=\"120\" rx=\"16\" fill=\"%231e40af\" opacity=\"0.12\"/%3E%3Cpath d=\"M760 440h40v40h-40z\" fill=\"%23ffffff\"/%3E%3Cpath d=\"M1400 0L1200 260l150 120 160-260z\" fill=\"url(%23g2)\"/%3E%3Cpath d=\"M0 140L260 0l140 180L0 320z\" fill=\"url(%23g2)\"/%3E%3C/svg%3E')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
+          <div style={{ width: "100%", maxWidth: 520 }}>
+            <div style={{ marginBottom: 24, overflow: "hidden", borderRadius: 24, boxShadow: "0 24px 60px rgba(15, 23, 42, 0.12)" }}>
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef6ff'/%3E%3Cstop offset='1' stop-color='%23dbeefa'/%3E%3C/linearGradient%3E%3ClinearGradient id='accent' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231e40af' stop-opacity='0.18'/%3E%3Cstop offset='1' stop-color='%2310b981' stop-opacity='0.08'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23bg)'/%3E%3Cpath d='M120 160h560v340H120z' fill='%23ffffff' stroke='%23cbd5e1' stroke-width='3'/%3E%3Crect x='200' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='340' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='480' y='240' width='120' height='180' rx='20' fill='%23eff6ff'/%3E%3Crect x='320' y='140' width='160' height='120' rx='24' fill='%231e40af'/%3E%3Cpath d='M360 180h80M400 140v120' stroke='%23ffffff' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='400' cy='80' r='60' fill='%2310b981'/%3E%3Cpath d='M400 55v50M375 80h50' stroke='%23ffffff' stroke-width='16' stroke-linecap='round'/%3E%3Cpath d='M140 260h520v100H140z' fill='url(%23accent)' opacity='0.28'/%3E%3Cpath d='M100 90L200 30l120 150L100 210z' fill='url(%23accent)' opacity='0.24'/%3E%3C/svg%3E"
+                alt="AI generated hospital illustration"
+                style={{ width: "100%", display: "block" }}
+              />
+            </div>
+            <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 36, fontWeight: 800, marginBottom: 24, color: "#1e2d3d" }}>Welcome to MediCare+</h1>
+            <div className="card" style={{ padding: 32 }}>
+              <button className="btn-primary" style={{ width: "100%", marginBottom: 12 }} onClick={() => { setAuthRole("admin"); setScreen("login"); setAuthMode("login"); setAuthForm(INITIAL_AUTH_FORM); }}>Admin Login</button>
+              <button className="btn-primary" style={{ width: "100%" }} onClick={() => { setAuthRole("patient"); setScreen("login"); setAuthMode("login"); setAuthForm(INITIAL_AUTH_FORM); }}>Patient Login</button>
+            </div>
           </div>
-          {[
-            { id: "dashboard", icon: "⊞", label: "Dashboard" },
-            { id: "appointments", icon: "📅", label: "Appointments" },
-            { id: "patients", icon: "🧑‍⚕️", label: "Patient Records" },
-            { id: "doctors", icon: "👨‍⚕️", label: "Doctors & Staff" },
-          ].map(t => (
-            <button key={t.id} className={`nav-btn ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>
-              <span style={{ fontSize: 16 }}>{t.icon}</span> {t.label}
-            </button>
-          ))}
-          <div style={{ marginTop: "auto", padding: "16px 8px 0", borderTop: "1px solid #f1f5f9" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#1e40af", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: 14 }}>A</div>
+        </div>
+      )}
+
+      {screen === "login" && (
+        <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+          <div className="card" style={{ maxWidth: 520, width: "100%", padding: 32 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600 }}>Admin</div>
-                <div style={{ fontSize: 11, color: "#94a3b8" }}>admin@medicare.com</div>
+                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, marginBottom: 6 }}>{authRole === "admin" ? "Admin Login" : "Patient Login"}</h1>
+                <p style={{ color: "#64748b", margin: 0 }}>{authRole === "admin" ? "Enter admin credentials to manage the hospital." : "Sign in to view doctors and book appointments."}</p>
+              </div>
+              <button className="btn-ghost" onClick={resetSession}>Back</button>
+            </div>
+            <div style={{ display: "grid", gap: 14 }}>
+              <div>
+                <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Email</label>
+                <input type="email" className="input" value={authForm.email} onChange={e => setAuthForm(f => ({ ...f, email: e.target.value }))} placeholder="you@example.com" />
+              </div>
+              {authRole === "admin" && (
+                <div>
+                  <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Hospital ID</label>
+                  <input type="text" className="input" value={authForm.hospitalId} onChange={e => setAuthForm(f => ({ ...f, hospitalId: e.target.value }))} placeholder="MED123" />
+                </div>
+              )}
+              <div>
+                <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Password</label>
+                <input type="password" className="input" value={authForm.password} onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))} placeholder="Enter password" />
+              </div>
+              <button className="btn-primary" style={{ width: "100%" }} onClick={authRole === "admin" ? handleAdminLogin : handlePatientLogin}>Sign In</button>
+              <div style={{ fontSize: 13, color: "#64748b", textAlign: "center" }}>
+                New {authRole === "patient" ? "patient" : "admin"}? <button className="btn-ghost" style={{ fontSize: 13, padding: "6px 10px" }} onClick={() => { setAuthMode("signup"); setScreen("signup"); }}>{authRole === "patient" ? "Create an account" : "Create admin account"}</button>
               </div>
             </div>
           </div>
-        </aside>
+        </div>
+      )}
 
-        {/* Main */}
-        <main style={{ marginLeft: 230, flex: 1, padding: "32px 32px 32px 40px" }}>
-
-          {/* DASHBOARD */}
-          {tab === "dashboard" && (
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+      {screen === "signup" && (
+        <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+          <div className="card" style={{ maxWidth: 560, width: "100%", padding: 32 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+              <div>
+                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, marginBottom: 6 }}>{authRole === "admin" ? "Admin Signup" : "Patient Signup"}</h1>
+                <p style={{ color: "#64748b", margin: 0 }}>{authRole === "admin" ? "Create a new admin account to manage the hospital dashboard." : "Create an account to book doctor appointments and manage your visits."}</p>
+              </div>
+              <button className="btn-ghost" onClick={resetSession}>Back</button>
+            </div>
+            <div style={{ display: "grid", gap: 14 }}>
+              <div>
+                <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Full Name</label>
+                <input type="text" className="input" value={authForm.name} onChange={e => setAuthForm(f => ({ ...f, name: e.target.value }))} placeholder="John Doe" />
+              </div>
+              <div>
+                <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Email</label>
+                <input type="email" className="input" value={authForm.email} onChange={e => setAuthForm(f => ({ ...f, email: e.target.value }))} placeholder="you@example.com" />
+              </div>
+              {authRole === "admin" && (
                 <div>
-                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, color: "#1e2d3d" }}>Good morning 👋</h1>
-                  <p style={{ color: "#64748b", marginTop: 4 }}>Here's what's happening at your hospital today.</p>
+                  <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Hospital ID</label>
+                  <input type="text" className="input" value={authForm.hospitalId} onChange={e => setAuthForm(f => ({ ...f, hospitalId: e.target.value }))} placeholder="MED123" />
                 </div>
-                <button className="btn-primary" onClick={() => setShowBooking(true)}>+ Book Appointment</button>
-              </div>
-
-              {/* Stats */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 28 }}>
-                {[
-                  { label: "Total Appointments", value: stats.total, color: "#1e40af", bg: "#eff6ff", icon: "📋" },
-                  { label: "Confirmed", value: stats.confirmed, color: "#10b981", bg: "#ecfdf5", icon: "✅" },
-                  { label: "Pending", value: stats.pending, color: "#f59e0b", bg: "#fffbeb", icon: "⏳" },
-                  { label: "Cancelled", value: stats.cancelled, color: "#ef4444", bg: "#fef2f2", icon: "❌" },
-                ].map(s => (
-                  <div key={s.label} className="card" style={{ padding: "20px 22px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <div style={{ fontSize: 12, color: "#64748b", fontWeight: 500, marginBottom: 6 }}>{s.label}</div>
-                        <div style={{ fontSize: 34, fontWeight: 700, color: s.color }}>{s.value}</div>
-                      </div>
-                      <div style={{ width: 42, height: 42, borderRadius: 12, background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>{s.icon}</div>
-                    </div>
+              )}
+              {authRole === "patient" && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                  <div>
+                    <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Phone</label>
+                    <input type="tel" className="input" value={authForm.phone} onChange={e => setAuthForm(f => ({ ...f, phone: e.target.value }))} placeholder="+1 555-0101" />
                   </div>
-                ))}
-              </div>
-
-              {/* Recent Appointments */}
-              <div className="card" style={{ padding: 24, marginBottom: 24 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700 }}>Recent Appointments</h2>
-                  <button className="btn-ghost" onClick={() => setTab("appointments")}>View all →</button>
+                  <div>
+                    <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Blood Type</label>
+                    <select className="input" value={authForm.blood} onChange={e => setAuthForm(f => ({ ...f, blood: e.target.value }))}>
+                      <option value="">Select blood type</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
+                  </div>
                 </div>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <thead>
-                    <tr style={{ borderBottom: "2px solid #f1f5f9" }}>
-                      {["Patient", "Doctor", "Date & Time", "Type", "Status"].map(h => (
-                        <th key={h} style={{ padding: "8px 12px", textAlign: "left", fontSize: 12, color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {appointments.slice(0, 4).map(a => (
-                      <tr key={a.id} style={{ borderBottom: "1px solid #f8fafc" }}>
-                        <td style={{ padding: "12px 12px", fontSize: 14, fontWeight: 500 }}>{a.patient}</td>
-                        <td style={{ padding: "12px 12px", fontSize: 14, color: "#64748b" }}>{a.doctor}</td>
-                        <td style={{ padding: "12px 12px", fontSize: 13, color: "#64748b" }}>{a.date} · {a.time}</td>
-                        <td style={{ padding: "12px 12px", fontSize: 13 }}>{a.type}</td>
-                        <td style={{ padding: "12px 12px" }}>
-                          <span className="badge" style={{ background: statusColor[a.status] + "22", color: statusColor[a.status] }}>{a.status}</span>
-                        </td>
-                      </tr>
+              )}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                <div>
+                  <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Password</label>
+                  <input type="password" className="input" value={authForm.password} onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))} placeholder="Create a password" />
+                </div>
+                <div>
+                  <label style={{ display: "block", color: "#374151", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>Confirm Password</label>
+                  <input type="password" className="input" value={authForm.confirmPassword} onChange={e => setAuthForm(f => ({ ...f, confirmPassword: e.target.value }))} placeholder="Confirm password" />
+                </div>
+              </div>
+              <button className="btn-primary" style={{ width: "100%" }} onClick={authRole === "admin" ? handleAdminSignup : handlePatientSignup}>{authRole === "admin" ? "Create Admin Account" : "Create Account"}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {screen === "adminHome" && (
+        <div style={{ display: "flex", minHeight: "100vh" }}>
+          <aside style={{ width: 230, background: "white", borderRight: "1px solid #e8f0fe", padding: "24px 16px", display: "flex", flexDirection: "column", gap: 4, position: "fixed", top: 0, bottom: 0, left: 0, zIndex: 10 }}>
+            <div style={{ padding: "0 8px 24px", borderBottom: "1px solid #f1f5f9", marginBottom: 8 }}>
+              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, color: "#1e40af", letterSpacing: "-0.5px" }}>MediCare+</div>
+              <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>Admin Dashboard</div>
+            </div>
+            {[
+              { id: "dashboard", icon: "⊞", label: "Dashboard" },
+              { id: "appointments", icon: "📅", label: "Appointments" },
+              { id: "doctors", icon: "👨‍⚕️", label: "Doctors & Staff" },
+            ].map(t => (
+              <button key={t.id} className={`nav-btn ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>
+                <span style={{ fontSize: 16 }}>{t.icon}</span> {t.label}
+              </button>
+            ))}
+            <div style={{ marginTop: "auto", padding: "16px 8px 0", borderTop: "1px solid #f1f5f9" }}>
+              <button className="btn-ghost" style={{ width: "100%" }} onClick={resetSession}>Sign Out</button>
+            </div>
+          </aside>
+          <main style={{ marginLeft: 230, flex: 1, padding: "32px 32px 32px 40px" }}>
+            {tab === "dashboard" && (
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+                  <div>
+                    <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800, color: "#1e2d3d" }}>Admin Dashboard</h1>
+                    <p style={{ color: "#64748b", marginTop: 4 }}>Review hospital activity and appointment status.</p>
+                  </div>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 28 }}>
+                  {[{ label: "Total Appointments", value: stats.total, color: "#1e40af", bg: "#eff6ff", icon: "📋" },
+                    { label: "Confirmed", value: stats.confirmed, color: "#10b981", bg: "#ecfdf5", icon: "✅" },
+                    { label: "Pending", value: stats.pending, color: "#f59e0b", bg: "#fffbeb", icon: "⏳" },
+                    { label: "Cancelled", value: stats.cancelled, color: "#ef4444", bg: "#fef2f2", icon: "❌" },].map(s => (
+                      <div key={s.label} className="card" style={{ padding: "20px 22px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                          <div>
+                            <div style={{ fontSize: 12, color: "#64748b", fontWeight: 500, marginBottom: 6 }}>{s.label}</div>
+                            <div style={{ fontSize: 34, fontWeight: 700, color: s.color }}>{s.value}</div>
+                          </div>
+                          <div style={{ width: 42, height: 42, borderRadius: 12, background: s.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>{s.icon}</div>
+                        </div>
+                      </div>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Quick Doctors */}
-              <div className="card" style={{ padding: 24 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
-                  <h2 style={{ fontSize: 16, fontWeight: 700 }}>Top Doctors</h2>
-                  <button className="btn-ghost" onClick={() => setTab("doctors")}>View all →</button>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
-                  {DOCTORS.slice(0, 3).map(d => (
-                    <div key={d.id} style={{ padding: "14px 16px", borderRadius: 12, border: "1.5px solid #f1f5f9", display: "flex", alignItems: "center", gap: 12 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: "50%", background: COLORS[d.specialty] + "22", color: COLORS[d.specialty], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14 }}>{d.avatar}</div>
-                      <div>
-                        <div style={{ fontSize: 13, fontWeight: 600 }}>{d.name}</div>
-                        <div style={{ fontSize: 12, color: "#64748b" }}>{d.specialty}</div>
-                        <div style={{ fontSize: 12, color: "#f59e0b", marginTop: 2 }}>★ {d.rating}</div>
+                <div className="card" style={{ padding: 24, marginBottom: 24 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+                    <h2 style={{ fontSize: 16, fontWeight: 700 }}>Recent Appointments</h2>
+                    <button className="btn-ghost" onClick={() => setTab("appointments")}>View all →</button>
+                  </div>
+                  <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                    <thead>
+                      <tr style={{ borderBottom: "2px solid #f1f5f9" }}>
+                        {['Patient', 'Doctor', 'Date & Time', 'Type', 'Status'].map(h => (
+                          <th key={h} style={{ padding: "8px 12px", textAlign: "left", fontSize: 12, color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {appointments.slice(0, 4).map(a => (
+                        <tr key={a.id} style={{ borderBottom: "1px solid #f8fafc" }}>
+                          <td style={{ padding: "12px 12px", fontSize: 14, fontWeight: 500 }}>{a.patient}</td>
+                          <td style={{ padding: "12px 12px", fontSize: 14, color: "#64748b" }}>{a.doctor}</td>
+                          <td style={{ padding: "12px 12px", fontSize: 13, color: "#64748b" }}>{a.date} · {a.time}</td>
+                          <td style={{ padding: "12px 12px", fontSize: 13 }}>{a.type}</td>
+                          <td style={{ padding: "12px 12px" }}>
+                            <span className="badge" style={{ background: statusColor[a.status] + "22", color: statusColor[a.status] }}>{a.status}</span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+            {tab === "appointments" && (
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800 }}>Appointments</h1>
+                </div>
+                <div className="card" style={{ padding: 24 }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                    <thead>
+                      <tr style={{ borderBottom: "2px solid #f1f5f9" }}>
+                        {['Patient', 'Doctor', 'Date', 'Time', 'Type', 'Status', 'Actions'].map(h => (
+                          <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontSize: 12, color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {appointments.map(a => (
+                        <tr key={a.id} style={{ borderBottom: "1px solid #f8fafc" }}>
+                          <td style={{ padding: "13px 12px", fontSize: 14, fontWeight: 500 }}>{a.patient}</td>
+                          <td style={{ padding: "13px 12px", fontSize: 13, color: "#64748b" }}>{a.doctor}</td>
+                          <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.date}</td>
+                          <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.time}</td>
+                          <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.type}</td>
+                          <td style={{ padding: "13px 12px" }}>
+                            <span className="badge" style={{ background: statusColor[a.status] + "22", color: statusColor[a.status] }}>{a.status}</span>
+                          </td>
+                          <td style={{ padding: "13px 12px", display: "flex", gap: 6 }}>
+                            {a.status === "Pending" && (
+                              <button className="btn-ghost" style={{ fontSize: 12, padding: "4px 10px", borderColor: "#10b981", color: "#10b981" }} onClick={() => confirmAppointment(a.id)}>Confirm</button>
+                            )}
+                            {a.status !== "Cancelled" && (
+                              <button className="btn-ghost" style={{ fontSize: 12, padding: "4px 10px", borderColor: "#ef4444", color: "#ef4444" }} onClick={() => cancelAppointment(a.id)}>Cancel</button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+            {tab === "doctors" && (
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+                  <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800 }}>Doctors & Staff</h1>
+                  <input className="input" style={{ width: 240 }} placeholder="Search doctors..." value={searchDoctor} onChange={e => setSearchDoctor(e.target.value)} />
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
+                  {filteredDoctors.map(d => (
+                    <div key={d.id} className="card doc-card" style={{ padding: 22, cursor: "pointer" }} onClick={() => setSelectedDoctor(d)}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
+                        <div style={{ width: 56, height: 56, borderRadius: "50%", background: COLORS[d.specialty] + "22", color: COLORS[d.specialty], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 18 }}>{d.avatar}</div>
+                        <div>
+                          <div style={{ fontWeight: 700, fontSize: 15 }}>{d.name}</div>
+                          <div style={{ fontSize: 13 }}>
+                            <span style={{ background: COLORS[d.specialty] + "22", color: COLORS[d.specialty], padding: "2px 8px", borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{d.specialty}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, textAlign: "center", padding: "12px 0", borderTop: "1px solid #f1f5f9", borderBottom: "1px solid #f1f5f9", marginBottom: 14 }}>
+                        <div><div style={{ fontSize: 16, fontWeight: 700, color: "#1e40af" }}>{d.rating}</div><div style={{ fontSize: 11, color: "#94a3b8" }}>Rating</div></div>
+                        <div><div style={{ fontSize: 16, fontWeight: 700, color: "#1e40af" }}>{d.exp}</div><div style={{ fontSize: 11, color: "#94a3b8" }}>Experience</div></div>
+                        <div><div style={{ fontSize: 16, fontWeight: 700, color: "#1e40af" }}>{d.patients}</div><div style={{ fontSize: 11, color: "#94a3b8" }}>Patients</div></div>
+                      </div>
+                      <div style={{ fontSize: 12, color: "#64748b", marginBottom: 12 }}>
+                        <span style={{ fontWeight: 600 }}>Available:</span> {d.available.join(", ")}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </main>
+        </div>
+      )}
 
-          {/* APPOINTMENTS */}
-          {tab === "appointments" && (
+      {screen === "patientHome" && (
+        <div style={{ minHeight: "100vh", padding: "32px 32px 32px 40px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
             <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800 }}>Appointments</h1>
-                <button className="btn-primary" onClick={() => setShowBooking(true)}>+ New Appointment</button>
-              </div>
-              <div className="card" style={{ padding: 24 }}>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <thead>
-                    <tr style={{ borderBottom: "2px solid #f1f5f9" }}>
-                      {["Patient", "Doctor", "Date", "Time", "Type", "Status", "Actions"].map(h => (
-                        <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontSize: 12, color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {appointments.map(a => (
-                      <tr key={a.id} style={{ borderBottom: "1px solid #f8fafc" }}>
-                        <td style={{ padding: "13px 12px", fontSize: 14, fontWeight: 500 }}>{a.patient}</td>
-                        <td style={{ padding: "13px 12px", fontSize: 13, color: "#64748b" }}>{a.doctor}</td>
-                        <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.date}</td>
-                        <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.time}</td>
-                        <td style={{ padding: "13px 12px", fontSize: 13 }}>{a.type}</td>
-                        <td style={{ padding: "13px 12px" }}>
-                          <span className="badge" style={{ background: statusColor[a.status] + "22", color: statusColor[a.status] }}>{a.status}</span>
-                        </td>
-                        <td style={{ padding: "13px 12px", display: "flex", gap: 6 }}>
-                          {a.status === "Pending" && (
-                            <button className="btn-ghost" style={{ fontSize: 12, padding: "4px 10px", borderColor: "#10b981", color: "#10b981" }} onClick={() => confirmAppointment(a.id)}>Confirm</button>
-                          )}
-                          {a.status !== "Cancelled" && (
-                            <button className="btn-ghost" style={{ fontSize: 12, padding: "4px 10px", borderColor: "#ef4444", color: "#ef4444" }} onClick={() => cancelAppointment(a.id)}>Cancel</button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 32, fontWeight: 800 }}>Hello, {patientUser.name}</h1>
+              <p style={{ color: "#64748b", marginTop: 4 }}>Browse doctors and book your next appointment.</p>
             </div>
-          )}
-
-          {/* PATIENTS */}
-          {tab === "patients" && (
+            <button className="btn-ghost" onClick={resetSession}>Sign Out</button>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 24 }}>
             <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800 }}>Patient Records</h1>
-                <div style={{ display: "flex", gap: 12 }}>
-                  <input className="input" style={{ width: 240 }} placeholder="Search patients..." value={searchPatient} onChange={e => setSearchPatient(e.target.value)} />
-                </div>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
-                {filteredPatients.map(p => (
-                  <div key={p.id} className="card" style={{ padding: 22, cursor: "pointer", transition: "all 0.2s" }} onClick={() => setPatientModal(p)}
-                    onMouseEnter={e => e.currentTarget.style.transform = "translateY(-3px)"}
-                    onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#eff6ff", color: "#1e40af", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 16 }}>
-                          {p.name.split(" ").map(n => n[0]).join("")}
-                        </div>
-                        <div>
-                          <div style={{ fontWeight: 600, fontSize: 15 }}>{p.name}</div>
-                          <div style={{ fontSize: 13, color: "#64748b" }}>Age {p.age} · Blood {p.blood}</div>
-                        </div>
-                      </div>
-                      <span className="badge" style={{ background: p.status === "Active" ? "#ecfdf5" : "#f8fafc", color: p.status === "Active" ? "#10b981" : "#94a3b8" }}>{p.status}</span>
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, fontSize: 13 }}>
-                      <div><span style={{ color: "#94a3b8" }}>Condition</span><div style={{ fontWeight: 500, marginTop: 2 }}>{p.condition}</div></div>
-                      <div><span style={{ color: "#94a3b8" }}>Last Visit</span><div style={{ fontWeight: 500, marginTop: 2 }}>{p.lastVisit}</div></div>
-                      <div><span style={{ color: "#94a3b8" }}>Phone</span><div style={{ fontWeight: 500, marginTop: 2 }}>{p.phone}</div></div>
-                    </div>
-                    <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #f1f5f9", display: "flex", gap: 8 }}>
-                      <button className="btn-primary" style={{ fontSize: 12, padding: "7px 14px" }} onClick={e => { e.stopPropagation(); setForm(f => ({ ...f, patient: p.name })); setShowBooking(true); }}>Book Appointment</button>
-                      <button className="btn-ghost" style={{ fontSize: 12 }} onClick={e => { e.stopPropagation(); setPatientModal(p); }}>View Details</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* DOCTORS */}
-          {tab === "doctors" && (
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-                <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 800 }}>Doctors & Staff</h1>
-                <input className="input" style={{ width: 240 }} placeholder="Search doctors..." value={searchDoctor} onChange={e => setSearchDoctor(e.target.value)} />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+                <h2 style={{ fontSize: 20, fontWeight: 700 }}>Available Doctors</h2>
+                <input className="input" style={{ width: 220 }} placeholder="Search doctors..." value={searchDoctor} onChange={e => setSearchDoctor(e.target.value)} />
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
                 {filteredDoctors.map(d => (
-                  <div key={d.id} className="card doc-card" style={{ padding: 22, cursor: "pointer" }} onClick={() => setSelectedDoctor(d)}>
+                  <div key={d.id} className="card doc-card" style={{ padding: 22 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
                       <div style={{ width: 56, height: 56, borderRadius: "50%", background: COLORS[d.specialty] + "22", color: COLORS[d.specialty], display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 18 }}>{d.avatar}</div>
                       <div>
                         <div style={{ fontWeight: 700, fontSize: 15 }}>{d.name}</div>
-                        <div style={{ fontSize: 13 }}>
-                          <span style={{ background: COLORS[d.specialty] + "22", color: COLORS[d.specialty], padding: "2px 8px", borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{d.specialty}</span>
-                        </div>
+                        <div style={{ fontSize: 13, color: "#64748b" }}>{d.specialty}</div>
                       </div>
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, textAlign: "center", padding: "12px 0", borderTop: "1px solid #f1f5f9", borderBottom: "1px solid #f1f5f9", marginBottom: 14 }}>
@@ -347,22 +561,57 @@ export default function HospitalApp() {
                       <div><div style={{ fontSize: 16, fontWeight: 700, color: "#1e40af" }}>{d.exp}</div><div style={{ fontSize: 11, color: "#94a3b8" }}>Experience</div></div>
                       <div><div style={{ fontSize: 16, fontWeight: 700, color: "#1e40af" }}>{d.patients}</div><div style={{ fontSize: 11, color: "#94a3b8" }}>Patients</div></div>
                     </div>
-                    <div style={{ fontSize: 12, color: "#64748b", marginBottom: 12 }}>
-                      <span style={{ fontWeight: 600 }}>Available: </span>{d.available.join(", ")}
+                    <div style={{ fontSize: 12, color: "#64748b", marginBottom: 16 }}>
+                      <div><span style={{ fontWeight: 600 }}>Days:</span> {d.available.join(", ")}</div>
+                      <div style={{ marginTop: 6 }}><span style={{ fontWeight: 600 }}>Times:</span> {d.times.join(", ")}</div>
                     </div>
-                    <button className="btn-primary" style={{ width: "100%", fontSize: 13 }} onClick={e => { e.stopPropagation(); setForm(f => ({ ...f, doctor: d.name })); setShowBooking(true); }}>
-                      Book Appointment
-                    </button>
+                    <button className="btn-primary" style={{ width: "100%" }} onClick={() => openBooking(d.name)}>Book Appointment</button>
                   </div>
                 ))}
               </div>
             </div>
-          )}
-        </main>
-      </div>
+            <div>
+              <div className="card" style={{ padding: 24, marginBottom: 24 }}>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>My Appointments</h2>
+                {patientAppointments.length === 0 ? (
+                  <div style={{ color: "#64748b", fontSize: 14 }}>No appointments yet. Book a doctor to get started.</div>
+                ) : (
+                  <div style={{ display: "grid", gap: 12 }}>
+                    {patientAppointments.map(a => (
+                      <div key={a.id} style={{ background: "#f8fafc", borderRadius: 14, padding: 14 }}>
+                        <div style={{ fontWeight: 700, marginBottom: 6 }}>{a.doctor}</div>
+                        <div style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, color: "#475569" }}>
+                          <span>{a.date}</span>
+                          <span>{a.time}</span>
+                        </div>
+                        <div style={{ marginTop: 8, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <span className="badge" style={{ background: statusColor[a.status] + "22", color: statusColor[a.status] }}>{a.status}</span>
+                          <span style={{ color: "#64748b", fontSize: 12 }}>{a.type}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="card" style={{ padding: 24 }}>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>Your Profile</h2>
+                <div style={{ display: "grid", gap: 10 }}>
+                  <div style={{ color: "#94a3b8" }}>Name</div>
+                  <div style={{ fontWeight: 600 }}>{patientUser.name}</div>
+                  <div style={{ color: "#94a3b8" }}>Email</div>
+                  <div style={{ fontWeight: 600 }}>{patientUser.email}</div>
+                  <div style={{ color: "#94a3b8" }}>Phone</div>
+                  <div style={{ fontWeight: 600 }}>{patientUser.phone}</div>
+                  <div style={{ color: "#94a3b8" }}>Blood Type</div>
+                  <div style={{ fontWeight: 600 }}>{patientUser.blood}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* Booking Modal */}
-      {showBooking && (
+      {screen === "patientHome" && showBooking && (
         <div className="overlay" onClick={() => setShowBooking(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, marginBottom: 6 }}>Book Appointment</h2>
@@ -370,10 +619,7 @@ export default function HospitalApp() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Patient Name</label>
-                <select className="input" value={form.patient} onChange={e => setForm(f => ({ ...f, patient: e.target.value }))}>
-                  <option value="">Select patient</option>
-                  {PATIENTS.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
-                </select>
+                <input className="input" value={patientUser?.name || form.patient} readOnly />
               </div>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Doctor</label>
@@ -385,13 +631,13 @@ export default function HospitalApp() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Date</label>
-                  <input type="date" className="input" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} />
+                  <input type="date" min={todayDate} className="input" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} />
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Time</label>
-                  <select className="input" value={form.time} onChange={e => setForm(f => ({ ...f, time: e.target.value }))}>
-                    <option value="">Select time</option>
-                    {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
+                  <select className="input" value={form.time} disabled={!selectedDoctorData} onChange={e => setForm(f => ({ ...f, time: e.target.value }))}>
+                    <option value="">{selectedDoctorData ? "Select time" : "Select doctor first"}</option>
+                    {selectedDoctorData && availableTimes.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
               </div>
@@ -410,8 +656,7 @@ export default function HospitalApp() {
         </div>
       )}
 
-      {/* Patient Detail Modal */}
-      {patientModal && (
+      {screen === "adminHome" && patientModal && (
         <div className="overlay" onClick={() => setPatientModal(null)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
@@ -449,14 +694,12 @@ export default function HospitalApp() {
                 ))}
             </div>
             <div style={{ display: "flex", gap: 10 }}>
-              <button className="btn-primary" onClick={() => { setPatientModal(null); setForm(f => ({ ...f, patient: patientModal.name })); setShowBooking(true); }}>Book Appointment</button>
               <button className="btn-ghost" onClick={() => setPatientModal(null)}>Close</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Doctor Detail Modal */}
       {selectedDoctor && (
         <div className="overlay" onClick={() => setSelectedDoctor(null)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
@@ -477,16 +720,29 @@ export default function HospitalApp() {
             </div>
             <div style={{ background: "#f8fafc", borderRadius: 12, padding: "14px 16px", marginBottom: 20 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Available Days</div>
-              <div style={{ display: "flex", gap: 8 }}>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
                   <span key={day} style={{ padding: "5px 12px", borderRadius: 8, fontSize: 13, fontWeight: 500, background: selectedDoctor.available.includes(day) ? "#1e40af" : "#e2e8f0", color: selectedDoctor.available.includes(day) ? "white" : "#94a3b8" }}>{day}</span>
                 ))}
               </div>
+              <div style={{ marginTop: 12, fontSize: 13, fontWeight: 600 }}>Times</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+                {selectedDoctor.times.map(time => (
+                  <span key={time} style={{ padding: "5px 12px", borderRadius: 8, background: "#e2e8f0", color: "#64748b", fontSize: 13 }}>{time}</span>
+                ))}
+              </div>
             </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setSelectedDoctor(null); setForm(f => ({ ...f, doctor: selectedDoctor.name })); setShowBooking(true); }}>Book Appointment</button>
-              <button className="btn-ghost" onClick={() => setSelectedDoctor(null)}>Close</button>
-            </div>
+            {screen === "patientHome" && (
+              <div style={{ display: "flex", gap: 10 }}>
+                <button className="btn-primary" style={{ flex: 1 }} onClick={() => { setSelectedDoctor(null); openBooking(selectedDoctor.name); }}>Book Appointment</button>
+                <button className="btn-ghost" onClick={() => setSelectedDoctor(null)}>Close</button>
+              </div>
+            )}
+            {screen === "adminHome" && (
+              <div style={{ display: "flex", gap: 10 }}>
+                <button className="btn-ghost" onClick={() => setSelectedDoctor(null)}>Close</button>
+              </div>
+            )}
           </div>
         </div>
       )}
